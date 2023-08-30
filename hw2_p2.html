@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CNIT 133 - Homewod 2 - Basic Operations Part1</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  </head>
+  <body>
+
+
+
+    
+    <div class="container" style="padding: 10px;">
+        <h1>CNIT 133 Homework 2 - Basic Operations - Part 2</h1>
+        <form>
+        <div style="padding: 10px;" > Enter 3 numbers</div>
+        <div style="padding: 10px;">
+            <input id="input1">
+            <input id="input2">
+            <input id="input3">
+        </div>
+        <div style="padding: 10px;">
+            <button type="button" id="btnProcess">Process</button>
+            <button type="button" id="btnClear" >Clear</button>
+        </div>
+        <div id="textArea1" >
+
+        </div>
+       
+
+
+    </form>
+          <ul>
+           
+          </li>
+          <li>
+          <a href="hw2.html" >
+            Homework 2 - Home.
+          </a>
+        </li>
+          
+        <li>
+          <a href="page.html" >
+            home
+          </a>
+        </li>
+        </ul>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script>
+
+        $("#btnProcess").click(function(){
+             process1();
+        });
+        
+        $("#btnClear").click(function(){
+             clear1();
+        });
+        
+        function process1(){
+     
+            var v1 = $("#input1").val();
+            var v2 = $("#input2").val();
+            var v3 = $("#input3").val();
+
+            if ( !areNumeric(v1, v2, v3) ) {
+                updateText("Please enter 3 integers");
+                return;
+            }
+            
+            var avg = (parseInt(v1) + parseInt(v2) + parseInt(v3)) / 3.0;
+            var t = "  " + v1  + ":" + v2 + ":" + v3;
+            updateText("Average = " + avg + " -> " + t);   
+        }
+
+        function areNumeric(v1, v2, v3){
+            if ( !$.isNumeric(v1) || !$.isNumeric(v2) || !$.isNumeric(v3)){
+                return false;
+            }
+            return true;
+        }
+        
+        function updateText(text){
+            let textArea1 =  $("#textArea1");
+            textArea1.html(text);
+            $("#textArea1").fadeOut(1000, function() { 
+                $("#textArea1").html("")
+                $("#textArea1").fadeIn(1000);}
+            );
+
+        }
+
+        function clear1(){
+            //alert("Clear");
+            $("#input1").val("");
+            $("#input2").val("");
+            $("#input3").val("");
+        }
+
+    </script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+  </body>
+</html>

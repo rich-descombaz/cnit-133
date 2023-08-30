@@ -14,22 +14,23 @@
     <div class="container" style="padding: 10px;">
         <h1>CNIT 133 Homework 2 - Basic Operations - Part 2</h1>
         <form>
-        <div style="padding: 10px;" > Enter 3 numbers</div>
+        <div style="padding: 10px;font-weight: bold;" > Enter 3 numbers</div>
         <div style="padding: 10px;">
             <input id="input1">
             <input id="input2">
             <input id="input3">
         </div>
+
+        <div id="textArea1" class="container"  >
+
+        </div>
+
         <div style="padding: 10px;">
             <button type="button" id="btnProcess">Process</button>
             <button type="button" id="btnClear" >Clear</button>
         </div>
-        <div id="textArea1" >
 
-        </div>
        
-
-
     </form>
           <ul>
            
@@ -65,13 +66,31 @@
             var v3 = $("#input3").val();
 
             if ( !areNumeric(v1, v2, v3) ) {
-                updateText("Please enter 3 integers");
+              updateText("<span style='color:red; font-weight:bold'>Please enter 3 integers</span>");
                 return;
             }
             
-            var avg = (parseInt(v1) + parseInt(v2) + parseInt(v3)) / 3.0;
-            var t = "  " + v1  + ":" + v2 + ":" + v3;
-            updateText("Average = " + avg + " -> " + t);   
+            var arr = [v1,v2,v3];
+
+            var max = parseInt(arr[0]);
+            var min = parseInt(arr[0]);
+            var sum = parseInt(arr[0]);
+            var prod = parseInt(arr[0]);
+
+            for (var i=1; i < arr.length; i++){
+              max = Math.max(max, parseInt(arr[i]));
+              min = Math.min(min, parseInt(arr[i]));
+              sum += parseInt(arr[i]);
+              prod *= parseInt(arr[i]);
+            }
+
+            var avg = sum / 3.0;
+            var rslt = "Average = " + avg;
+            rslt += "<br>Sum : " + sum;
+            rslt += "<br>Prod : " + prod
+            rslt += "<br>Min : " + min;
+            rslt += "<br>Max : " + max;
+            updateText(rslt);   
         }
 
         function areNumeric(v1, v2, v3){
@@ -84,9 +103,10 @@
         function updateText(text){
             let textArea1 =  $("#textArea1");
             textArea1.html(text);
-            $("#textArea1").fadeOut(1000, function() { 
+            $("#textArea1").fadeOut(3000, function() { 
                 $("#textArea1").html("")
-                $("#textArea1").fadeIn(1000);}
+                $("#textArea1").fadeIn(1000);
+              }
             );
 
         }

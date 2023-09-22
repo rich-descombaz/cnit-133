@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CNIT 133 - Homewod 2 - Student Grades</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  </head>
+  <body>
+    
+    
+    <div class="container" style="padding: 10px;">
+        <h1>Student Grades</h1>
+        <form>
+        <div style="padding: 5px;font-weight: bold;" > Enter number between 0-100</div>
+        <div class="row" style="padding: 5px; width: 50%;">
+            <div class="col" style="text-align: right;"> <label>Homework Average : </label></div>
+            <div class="col"><input id="homeWorkAvg" ></div>
+        </div>
+        <div class="row" style="padding: 5px; width: 50%">
+            <div class="col" style="text-align: right;"> <label>Mid-Term Exam Score :  </label></div>
+            <div class="col"><input id="midTermScore"></div>
+        </div>
+        <div class="row" style="padding: 5px;width: 50%">
+            <div class="col" style="text-align: right;"><label>Final Exam Score : </label></div>
+            <div class="col"><input id="finalScore"></div>
+        </div>
+        <div class="row" style="padding: 5px;width: 50%">
+            <div class="col" style="text-align: right;"><label>Participation Score : </label></div>
+            <div class="col"><input id="participationScore"></div>
+        </div>
+        <br>
+
+        <div id="textArea1" class="container"  >
+
+        </div>
+
+        <div style="padding: 10px; width: 50%;" class="row">
+            <div class="col" style="padding-left: 35%;">
+                <button type="button" id="btnProcess" class="btn btn-primary mb-3">Submit</button>
+                <button type="button" id="btnClear"  class="btn btn-primary mb-3">Clear</button>
+            </div>
+        </div>
+        <br>
+    
+          <ul>
+           
+            <li>
+              <a href="hw3_p2.html" >
+                Part 2 - Sales people commissuins.
+              </a>
+            
+          </li>
+          <li>
+          <a href="hw3.html" >
+            Back to Homework 3
+          </a>
+        </li>
+          
+        <li>
+          <a href="page.html" >
+            home
+          </a>
+        </li>
+        </ul>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script>
+
+        $("#btnProcess").click(function(){
+             calculateScore();
+        });
+        
+        $("#btnClear").click(function(){
+             clear1();
+        });
+        
+        function calculateScore(){
+            updateText("");
+     
+            let homeWordAvg = $("#homeWorkAvg").val();
+            let midTermScore = $("#midTermScore").val();
+            let finalScore = $("#finalScore").val();
+            let participation = $("#participationScore").val();            
+            
+            var rsltText = "";
+            if (!$.isNumeric(homeWordAvg) || !inRange(homeWordAvg) ){
+                rsltText +=  "<span style='color:red; font-weight:bold'>Homeword Average field should be between 0-100</span><br>"
+            }
+            if (!$.isNumeric(midTermScore) || !inRange(midTermScore) ){
+                rsltText +=  "<span style='color:red; font-weight:bold'>Mid-Term score should be between 0-100</span><br>"
+            }
+            if (!$.isNumeric(finalScore) || !inRange(finalScore) ){
+                rsltText +=  "<span style='color:red; font-weight:bold'>Final score should be between 0-100</span><br>"
+            }
+            if (!$.isNumeric(participation) || !inRange(participation) ){
+                rsltText +=  "<span style='color:red; font-weight:bold'>Participation score should be between 0-100</span><br>"
+            }
+            if (rsltText.trim() != ""){
+                updateText(rsltText);
+                return;
+            }
+            
+
+            var finalAvg =  Math.round((homeWordAvg * .5) + (midTermScore  * .2) + (finalScore * .2) + (participation * .1)); 
+            
+            rsltText = r =  "Final Avg. " + finalAvg;
+            if (finalAvg >= 90){
+                rsltText +=   " Grade : A";  
+            }
+            else if (finalAvg >= 80){
+                rsltText +=  " Grade : B";    
+            }
+            else if (finalAvg >= 70){
+                rsltText +=  " Grade : C"; 
+            }
+            else if (finalAvg >= 60){
+                rsltText +=  " Grade : D - Student must retake course."; 
+
+            }
+            else{
+                rsltText +=  " Grade : F - Student must retake course."; 
+            }
+            rsltText = "<span style='color:blue; font-weight:bold'>" + rsltText + "</span>";
+            updateText(rsltText);   
+        }
+
+        function inRange(v1){
+            val = parseInt(v1);
+            if (val >= 0 && val <= 100){
+                return true;
+            }
+            return false;
+        }
+        
+        function updateText(text){
+            let textArea1 =  $("#textArea1");
+            textArea1.html(text);
+        }
+
+        function clear1(){
+            updateText("");
+            $("#homeWorkAvg").val("");
+            $("#midTermScore").val("");
+            $("#finalScore").val("");
+            $("#participationScore").val("");       
+        }
+
+    </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+  </body>
+</html>

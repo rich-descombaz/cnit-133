@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CNIT 133 - Homework 5 part 1 - User Data</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  </head>
+  <body>
+    
+    
+    <div class="container" style="padding: 10px;">
+        <h1> Homework 5 part 1  - User Data</h1>
+       
+        <br>
+        <form id="userProfile">
+          <div id ="display1" style="padding: 10px;">
+            <label>Enter full name : </label>
+            <input type="text" id="userName">
+
+          </div>
+
+          <div id ="display2"  style="padding: 10px;">
+            <lable>Select your age range : </lable>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="ageRange" id="ageRange1" value="Less Than 21">
+              <label class="form-check-label" for="ageRange1">
+                Less than 21
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="ageRange" id="ageRange2"  value="between 21 and 50">
+              <label class="form-check-label" for="ageRange2">
+                between 21-50
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="ageRange" id="ageRange3" value="olde than 50" >
+              <label class="form-check-label" for="ageRange3">
+                Older than 50
+              </label>
+            </div>
+          </div>
+
+          <div id ="display3" style="padding: 10px;">
+          <lable>Select the browsers that you have used</lable>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="firefox" name="browserCheck" id="browserCheck1">
+            <label class="form-check-label" for="browserCheck1">
+              Firefox
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="edge" name="browserCheck" id="browserCheck2">
+            <label class="form-check-label" for="browserCheck1">
+              Edge
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="chrome" name="browserCheck" id="browserCheck3">
+            <label class="form-check-label" for="browserCheck2">
+              Chrome
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="safari" name="browserCheck" id="browserCheck4">
+            <label class="form-check-label" for="browserCheck4">
+              Safari
+            </label>
+          </div>
+
+
+          <div>
+            <label for="movieSelect">Select Your Favorite Movie Genre:</label>
+            <select id="movieType">
+              <option value="" disabled selected>(Choose one)</option>
+              <option>Action</option>
+              <option>Comedy</option>
+              <option>Drama</option>
+              <option>Documentary</option>
+              <option>Science Fiction</option>
+            </select>
+
+          </div>
+
+          <div>
+            <br>
+            <input type="submit" id="submitButton" value="Submit">
+            <input type="button" id="clearButton" value="Clear">
+          </div>
+        </form>
+      </div>
+
+         
+        <div class="container" id="display">
+
+        </div>
+
+     
+
+        <br>
+        <br>
+          <ul>
+            
+          <li>
+          <a href="hw5.html" >
+            Back to Homework 5
+          </a>
+        </li>
+          
+        <li>
+          <a href="page.html" >
+            home
+          </a>
+        </li>
+        </ul>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+      // Set onlcik events.
+      var submitBtn = document.getElementById("submitButton");
+      var clearBtn = document.getElementById("clearButton");
+      var display = document.getElementById("display");
+
+
+      submitBtn.addEventListener("click", function (event){
+        var userValues = [{},{},[],{}];
+        var errors = [];
+        event.preventDefault();
+          // Name Input
+          var name = $("#userName").val();
+          userValues[0] = name;
+          if (name.trim() ===  ""){
+            errors.push("Name cannot be empty.");
+          }
+
+          // Age range
+          var ageRangeSel = $("input[name='ageRange']:checked");
+          userValues[1] = ageRangeSel.val();
+          if (!userValues[1]){
+            errors.push("Select age Range.");
+          }
+
+          // Browsers Inputs
+          var browserArr = [];
+          var browsers = document.getElementsByName("browserCheck");
+          browsers.forEach(function(browser){
+            if (browser.checked){
+              console.log("Browser Selected : " + browser.value);
+              browserArr.push(browser.value);
+            }
+          });
+          userValues[2] = browserArr;
+          if (browserArr.length == 0){
+            errors.push("Select at least one browser.");
+          }
+
+          // Movie Genre
+          var selectGenre = $("#movieType").val();
+          userValues[3] = selectGenre;
+          if (!selectGenre){
+            errors.push("Select a movie genre.");
+          }
+
+          if (errors.length > 0){
+              printErrorMessage(errors);
+          }
+          else{
+            printMessage("Thanks, your data was submitted!");
+          }
+       
+        });
+
+
+      clearBtn.addEventListener("click", function(){
+        $("#userName").val("");
+        $("input[name='ageRange']").prop("checked", false);
+        $("input[name='browserCheck']").prop("checked", false);
+        $("#movieType").val(null);
+      });
+
+      function printErrorMessage(errors){
+        
+        msg = "<span style='color:red; font-weight:bold'>";
+        for (var i=0; i < errors.length; i++){
+          msg +=  errors[i];
+          msg += "<br>";
+        }
+        msg += "<span>";
+
+        display.innerHTML = msg;
+
+      }
+
+      function printMessage(msg){
+        display.innerHTML = msg;
+      }
+       
+    </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+  </body>
+</html>

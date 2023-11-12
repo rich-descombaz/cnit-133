@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CNIT 133 - Homework 6 part 1 -</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  </head>
+  <body>
+    
+    
+    <div class="container" style="padding: 10px;">
+        <h1> Homework 6 part 1  - Sumarize Decimal</h1>
+       
+        <br>
+        <form id="decNumForm">
+          <div id ="display1" style="padding: 10px;">
+            <label>Enter a number with at least 4 decimal places: </label>
+            <input type="text" id="decimalNum">
+          </div>
+
+          <div>
+            <br>
+            <input type="submit" id="submitButton" value="Submit">
+            <input type="button" id="clearButton" value="Clear">
+          </div>
+        </form>
+     
+
+         
+        <div class="container" id="display">
+
+        </div>
+
+     
+
+        <br>
+        <br>
+          <ul>
+            
+          <li>
+          <a href="hw6.html" >
+            Back to Homework 6
+          </a>
+        </li>
+          
+        <li>
+          <a href="page.html" >
+            home
+          </a>
+        </li>
+        </ul>
+    </div>
+  </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+      // Set onlcik events.
+      var submitBtn = document.getElementById("submitButton");
+      var clearBtn = document.getElementById("clearButton");
+      var display = document.getElementById("display");
+
+
+      submitBtn.addEventListener("click", function (event){
+          var decimalNum = document.getElementById("decimalNum").value;
+          var errors = [];
+          event.preventDefault();
+          // Ensure number has at least 4 decimal places.
+          if ( !isNaN(decimalNum) && parseFloat(decimalNum) % 1 != 0 && 
+              decimalNum.split(".").length == 2 && decimalNum.split(".")[1].length >= 4  ){
+            summarize(decimalNum);
+          } else {
+            errors.push("You need to type a number with at least 4 decimals, please try again.");
+            printMessage(errors, true);
+          }
+        }
+      );
+      
+
+      clearBtn.addEventListener("click", function(){
+        $("#decimalNum").val("");
+        $("#display").html("");
+      });
+
+      function summarize(val){
+        var messages = [];
+        messages.push("You typed: " + val);
+        messages.push("Rounded to the nearest integer: " + Math.round(val));
+        messages.push("Square root rounded to integer: " + Math.round(Math.sqrt(val)));
+        messages.push("Rounded to the nearest 10th position: " + (Math.round(val * 10) / 10).toFixed(1));
+        messages.push("Rounded to the nearest 100th position: " + (Math.round(val * 100) / 100).toFixed(2));
+        messages.push("Rounded to the nearest 1000th position: " + (Math.round(val * 1000) / 1000).toFixed(3));
+        printMessage(messages, false);
+      }
+
+      function printMessage(errors, isError){
+        
+        msg = isError ? "<br><span style='color:red; font-weight:bold'>" : "<br><span style='font-weight:bold'>";
+        for (var i=0; i < errors.length; i++){
+          msg +=  errors[i];
+          msg += "<br>";
+        }
+        msg += "<span>";
+        display.innerHTML = msg;
+      }
+
+       
+    </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+  </body>
+</html>

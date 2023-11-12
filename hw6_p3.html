@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CNIT 133 - Homework 6 part 3 -</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  </head>
+  <body>
+    
+    
+    <div class="container" style="padding: 10px;">
+        <h1> Homework 6 part 3  - Telephone </h1>
+       
+        <br>
+        <form id="textForm">
+         
+          <div  style="padding: 10px;">
+              <label>Enter your Telephone: </label>
+              <input type="text" id="phoneNumber" placeholder="(999) 999-9999" >
+          </div>
+          <div  style="padding: 10px;">
+            <!-- <label>Enter your Telephone: </label> -->
+            (<input type="text" id="areaCode" readonly size="3">)
+            <input type="text" id="first3" readonly size="3">-
+            <input type="text" id="last4" readonly size="4">
+        </div>
+          <div>
+            <br>
+            <input type="submit" id="submitButton" value="Submit">
+          </div>
+        </form>
+     
+        <div class="container" id="display">
+
+        </div>
+        <br>
+        <br>
+          <ul>
+            
+          <li>
+          <a href="hw6.html" >
+            Back to Homework 6
+          </a>
+        </li>
+          
+        <li>
+          <a href="page.html" >
+            home
+          </a>
+        </li>
+        </ul>
+    </div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+  <script>
+      $(document).ready(function() {
+        $('#phoneNumber').mask('(999) 999-9999');
+      })
+      // Set onlcik events.
+      var submitBtn = document.getElementById("submitButton");
+      var display = document.getElementById("display");
+
+
+      submitBtn.addEventListener("click", function (event){
+          event.preventDefault();
+          var phoneNumber = $("#phoneNumber").val();
+          
+          var errors = [];
+        
+          // Ensure number has at least 4 decimal places.
+          analyzePhoneNumber(phoneNumber)
+        }
+      );
+
+      function analyzePhoneNumber(text){
+        var messages = [];
+        console.log(text);
+        let  count = 0;
+        var num = "";
+        for (let i = 0; i < text.length; i++) {
+          if (!isNaN(parseInt(text[i])) && text[i] != " ") {
+            num += text[i];
+          }
+        }
+
+        if (num.length !== 10){
+          messages.push("You need to type a 10 digit number in this format (999) 999-9999, please try again.");
+          printMessage(messages, true);
+          clearForm();
+        }
+        else{
+          $("#areaCode").val(num.substring(0,3));
+          $("#first3").val(num.substring(3,6));
+          $("#last4").val(num.substring(6,11));
+          printMessage([], true);
+        }
+      
+      }
+
+      function clearForm(){
+       // $("#phoneNumber").val("");
+        $("#areaCode").val("");
+        $("#first3").val("");
+        $("#last4").val("");
+      }
+
+      function printMessage(errors, isError){
+        
+        msg = isError ? "<br><span style='color:red; font-weight:bold'>" : "<br><span style='font-weight:bold'>";
+        for (var i=0; i < errors.length; i++){
+          msg +=  errors[i];
+          msg += "<br>";
+        }
+        msg += "<span>";
+        display.innerHTML = msg;
+      }
+
+       
+    </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+  </body>
+</html>

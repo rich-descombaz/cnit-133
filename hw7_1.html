@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CNIT 133 - Homework 7 part 1 -</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+
+<body>
+
+
+  <div class="container" style="padding: 10px;">
+    <h1> Homework 7 Part 1 - Style Editor</h1>
+
+    <br>
+
+    <div id="display1" style="padding: 10px;">
+      <p>
+        JavaScript and jQuery are both essential tools for web development, but they serve different purposes and have
+        distinct characteristics.
+      </p>
+      <p>
+        JavaScript:
+        JavaScript is a versatile and powerful programming language that is supported by all modern web browsers. It is
+        a fundamental building ...It is a full-fledged programming language that allows developers
+        to create complex logic, control flow, and data manipulation. JavaScript code is typically written directly in
+        the web page's HTML document or as external script files (.js).
+      </p>
+      <p>
+
+        jQuery:
+        jQuery is a popular JavaScript library that simplifies and streamlines the process of working with JavaScript,
+        particularly when dealing with DOM manipulation and event handling....raw JavaScript, making it more accessible and user-friendly for
+        developers. It was especially popular in the early days of web development when browser compatibility issues
+        were more prevalent, as jQuery provided a consistent way to interact with the DOM across different browsers.
+      </p>
+
+      <p>
+
+        In summary, JavaScript is the core programming language of the web and offers more extensive capabilities for
+        web development. ....While jQuery was once very popular, modern web
+        development has shifted towards using vanilla JavaScript or other frameworks like React, Angular, or Vue.js to
+        achieve similar functionality while maintaining more control and performance.
+      </p>
+
+      <form id="styleForm">
+        <div id="displayBackground" style="padding: 10px;">
+          <label>Choose background color: </label>
+          <!-- 3 radio buttons to select color  -->
+          <input type="radio" id="red" name="color" value="red" checked>
+          <label for="red">Red</label>
+          <input type="radio" id="blue" name="color" value="blue">
+          <label for="blue">Blue</label>
+          <input type="radio" id="green" name="color" value="green">
+          <label for="green">Green</label>
+
+        </div>
+        <div id="displayDecoration" style="padding: 10px;">
+          <!-- Check boxes for styless underline, bold, italic-->
+          <label>Choose a style:
+            <input type="checkbox" id="underline" name="underline" value="underline">
+            <label for="underline">Underline</label>
+            <input type="checkbox" id="bold" name="bold" value="bold">
+            <label for="bold">Bold</label>
+            <input type="checkbox" id="italic" name="italic" value="italic">
+            <label for="italic">Italic</label>
+        </div>
+
+        <div id="displayFontSize" style="padding: 10px;">
+          <!-- Select font size-->
+          <label>Choose font size:</label>
+          <select id="fontSize">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+
+        </div>
+
+
+      </form>
+
+
+      <br>
+      <br>
+      <ul>
+
+        <li>
+          <a href="hw7.html">
+            Back to Homework 7
+          </a>
+        </li>
+
+
+      </ul>
+    </div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+    $(document).ready(function () {
+      changeTextColor();
+      updagteFontSize();
+    });
+
+    var redBtm = document.getElementById("red");
+    var blue = document.getElementById("blue");
+    var green = document.getElementById("green");
+
+    redBtm.addEventListener("click", changeTextColor);
+    blue.addEventListener("click", changeTextColor);
+    green.addEventListener("click", changeTextColor);
+
+    underline.addEventListener("change", applyStyles);
+    bold.addEventListener("change", applyStyles);
+    italic.addEventListener("change", applyStyles);
+
+    fontSize.addEventListener("change", updagteFontSize);
+
+
+    function updagteFontSize() {
+      var fontSize = document.getElementById("fontSize").value;
+      document.querySelectorAll("p").forEach(function (p) {
+        p.style.fontSize = fontSize + "rem";
+      });
+    }
+
+    function changeTextColor() {
+      var selColor = "red";
+      if (redBtm.checked) {
+        selColor = "red";
+      } else if (blue.checked) {
+        selColor = "blue";
+      } else if (green.checked) {
+        selColor = "green";
+      }
+
+      document.querySelectorAll("p").forEach(function (p) {
+        p.style.backgroundColor = selColor;
+      });
+    }
+
+    function applyStyles() {
+      var underline = document.getElementById("underline");
+      var bold = document.getElementById("bold");
+      var italic = document.getElementById("italic");
+
+      document.querySelectorAll("p").forEach(function (p) {
+        p.style.textDecoration = underline.checked ? "underline" : "none";
+        p.style.fontWeight = bold.checked ? "bold" : "normal";
+        p.style.fontStyle = italic.checked ? "italic" : "normal";
+      });
+    }
+
+  </script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+    crossorigin="anonymous"></script>
+
+</body>
+
+</html>

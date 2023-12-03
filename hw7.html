@@ -1,17 +1,74 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>CNIT 133</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-  </head>
-  <body>
-    <h1>hw7 - Coming Soon!!!</h1>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 
-    <a href="page.html" class="list-group-item list-group-item-action " aria-current="true">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CNIT 133</title>
+
+  <style>
+    h2 {
+      background: url(open.png) no-repeat 0 11px;
+      padding: 10px 0 0 25px;
+      cursor: pointer;
+    }
+
+    h2.close {
+      background-image: url(close.png);
+    }
+
+    .answer {
+      margin-left: 25px;
+    }
+  </style>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+    crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.7.1/jquery-ui.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $('.answer').hide();
+      $('.main h2').toggle(
+        function () {
+          $(this).next('.answer').slideDown();
+          $(this).addClass('close');
+        },
+        function () {
+          $(this).next('.answer').fadeOut();
+          $(this).removeClass('close');
+        }
+      ); // end toggle
+    }); // end ready
+  </script>
+</head>
+
+<body>
+  <div class="main">
+    <div class="container">
+      <h1>CNIT 133 Homework 7 - Object Model and Event Model</h1>
+
+      <h2>
+        Part 1 - Style Editor
+      </h2>
+      <div class="answer">This is part one <a href="hw7_1.html">part 1 text style editor</a></div>
+
+
+      <h2>
+        Part 2 - Navigator
+      </h2>
+      <div class="answer">This is part 2 <a href="hw7_2.html">part 2 homework navigator</a></div>
+
+
+      <a href="page.html">
         home
       </a>
-  </body>
+
+    </div>
+  </div>
+</body>
+
 </html>

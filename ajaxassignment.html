@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Homework 8 - AJAX Application</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+</head>
+<style>
+  table,
+  th,
+  td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+
+  th,
+  td {
+    padding: 5px;
+  }
+</style>
+
+<body>
+  <div class="container">
+    <h1> Homework 8 - AJAX Application</h1>
+
+    <div>
+      <a href="page.html">
+        home
+      </a>
+    </div>
+    <br>
+
+    <button type="button" onclick="loadDoc()">Get CD collection</button>
+    <br><br>
+    <table id="demo"></table>
+
+    <script>
+      function loadDoc() {
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function () {
+          myFunction(this);
+        }
+        xhttp.open("GET", "cd_catalog.xml");
+        xhttp.send();
+      }
+      function myFunction(xml) {
+        const xmlDoc = xml.responseXML;
+        const x = xmlDoc.getElementsByTagName("CD");
+        let table = "<tr><th>Artist</th><th>Title</th></tr>";
+        for (let i = 0; i < x.length; i++) {
+          table += "<tr><td>" +
+            x[i].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue +
+            "</td><td>" +
+            x[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue +
+            "</td></tr>";
+        }
+        document.getElementById("demo").innerHTML = table;
+      }
+    </script>
+
+
+    <div class="container">
+      <h2>Explanation of AJAX</h2>
+
+      <p>The AJAX code used is called when the user click the "Get CD Collection button". The 'clickk' event calls the
+        LoadDoc function,
+        which creates an oblect of type XMLHttpRequest.
+        The XMLHttpRequest object is then used to open the XML file, and send the request. The open method initializes
+        the call and takes two parameters,
+        request type "GET and the URL <a href="cd_catalog.xml" target="_blank">"cd_catalog.xml"</a>. The send method
+        sends the request to the server.
+        When the call responds and has completed succesfully it calls the xhttp.onload responds and calls myFunction
+        function.
+        The response then parses the data and puts into a table for display.
+      </p>
+    </div>
+
+    <div class="container">
+      <h2>Rest API</h2>
+      <h3>Global Restaurant Mobile - Menu Tech Strategy</h3>
+      <p>
+        Since Global Restaurant user research has shown that our users are interested in the menu, we have decided to
+        create a
+        mobile application and are very dissatisfied with menu applicaions that fail to do so.
+        Since the mobile application is our flag ship produt, and our users expect to be able to access the menu quickly
+        and easily, it is important
+        that we are able to provide the menu data to the application in a timely manner.
+      </p>
+      <p>
+        We have decided to use "Us Restaurant Menus" API to provide the menu data to our mobile application.
+        This database has over 300,000 menus with 30,000,000 menu items.
+
+      </p>
+      <p>
+      <h4>Usage Requirements:</h4>
+
+      There is no listed limit to the number of requests that can be made, and so we will proceed with the assumption
+      that there is no limit,
+      and that it can handle the millions of users that we expect to use our application. Likewise, there is no listed
+      limit to the number of requests that can be made per second or other throttling limits that we know of.
+      The API is free to use, and so we will not have to pay for the service.
+      </p>
+      <p>
+        <b>Technical Details</b>
+        An <b>oAuth Bearer</b> token is required to access the API. The token is obtained by sending a POST request to
+        the API with the client_id and client_secret.
+        There is a series of REST apis that can be used to access the data. The API is accessed using a GET request. The
+        data is returned in JSON format.
+      </p>
+      <p>
+      <h4>API</h4>
+      For further details on the API, please see the documentation at <a
+        href="https://rapidapi.com/ordering-stack-ordering-stack-default/api/menu7/" target="_blank">REST calls</a>
+      </p>
+
+      <p>
+        <h4>Conclusion</h4>
+          To conclude, we have decided to use the "Us Restaurant Menus" API to provide the menu data to our mobile application because : 
+          <ul> 
+            <li>It has over 300,000 menus with 30,000,000 menu items, which is more than enough to meet our needs.</li>
+            <li>It is free to use, and has no listed limits on the number of requests that can be made, as </li>
+            <li>It uses standard Rest APIs and JSON that is familar to our development staff.</li>
+          </ul>
+        </p>
+    </div>
+  </div>
+</body>
+</html>
